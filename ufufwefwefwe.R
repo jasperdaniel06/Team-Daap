@@ -4,4 +4,3 @@ data2 <- read.csv("wozdata.csv")
 View(data2)
 
 
-
