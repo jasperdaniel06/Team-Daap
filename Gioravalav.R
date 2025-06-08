@@ -52,10 +52,19 @@ ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `gro
   ) +
   theme_bw()
 
+# code to find out what house prices had the most relative changes
+data2[] <- lapply(data2, function(x) as.numeric(as.character(x))) # makes the characters of all the numbers into numeric in the old data2
+dif <- c() # give variable dif the value of a vector
 
+for(i in 1:nrow(data2))
+{
+  dif[i] = data2$"2023"[i] / data2$"2019"[i] # Element division  
+}
 
+data2 <- cbind(data2, dif) # add the dif variable to the data2 dataset
 
-
+slice_max(data2, dif) # finds max relative difference
+slice_min(data2, dif) # finds min relative difference
 
 
 
