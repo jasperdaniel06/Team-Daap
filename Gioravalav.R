@@ -68,5 +68,3 @@ slice_min(data2, dif) # finds min relative difference
 
 
 
-aaa
-
