@@ -61,7 +61,7 @@ for(i in 1:nrow(data2))
   dif[i] = data2$"2023"[i] / data2$"2019"[i] # Element division  
 }
 
-data2 <- cbind(data2, dif) # add the dif variable to the data2 data set
+data2 <- cbind(data2, dif) # add the dif variable to the data2 dataset
 
 slice_max(data2, dif) # finds max relative difference
 slice_min(data2, dif) # finds min relative difference
