@@ -52,6 +52,7 @@ ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `gro
   ) +
   theme_bw()
 
+
 # code to find out what house prices had the most relative changes
 data2[] <- lapply(data2, function(x) as.numeric(as.character(x))) # makes the characters of all the numbers into numeric in the old data2
 dif <- c() # give variable dif the value of a vector
@@ -66,5 +67,88 @@ data2 <- cbind(data2, dif) # add the dif variable to the data2 dataset
 slice_max(data2, dif) # finds max relative difference
 slice_min(data2, dif) # finds min relative difference
 
+# code to find houseprices relative to income in these places
+rownumber_lel <- which(rownames(data) == "Lelystad")
+rownumber_hor <- which(rownames(data) == "Horst aan de Maas")
+rownumber_lel
+rownumber_hor
 
+new_row_lel <- data[178, ] / data[3,]  # Element-wise division
+new_row_hor <- data[156, ] / data[3,]  # Element-wise division
 
+rownames(new_row_lel) <- "Houseprices in Lelystad relative to Avg personal income"
+rownames(new_row_hor) <- "Houseprices in Horst aan de Maas relative to Avg personal income"
+
+data <- rbind(data[1:5, ], new_row_lel, data[6:nrow(data), ])
+data <- rbind(data[1:6, ], new_row_hor, data[7:nrow(data), ])
+
+# under here is the code to plot the new row 
+
+graph_data <- data.frame(
+  Year = colnames(data)[1:5],  # Extract year labels
+  Value = as.numeric(data[6, 1:5])  # Convert row values to numeric
+)
+
+ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
+  geom_line(color = "blue", linewidth = 1) +
+  geom_point(color = "red", size = 2) +
+  labs(
+    title = "Houseprices in Lelystad Relative to Personal Income",
+    x = "Year",
+    y = "Relative Value"
+  ) +
+  theme_bw()
+
+# under here is the code to plot the new row 
+
+graph_data <- data.frame(
+  Year = colnames(data)[1:5],  # Extract year labels
+  Value = as.numeric(data[7, 1:5])  # Convert row values to numeric
+)
+
+ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
+  geom_line(color = "blue", linewidth = 1) +
+  geom_point(color = "red", size = 2) +
+  labs(
+    title = "Houseprices in Horst aan de Maas Relative to Personal Income",
+    x = "Year",
+    y = "Relative Value"
+  ) +
+  theme_bw()
+
+voltijd <- read.csv("inkdata.csv")
+View(voltijd)
+
+colnames(voltijd) <- voltijd[5, ] # turns the column names in a year
+voltijd <- voltijd[-c(1, 2, 3, 4, 5, 6, 11), -c(1, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16, 17, 19, 20, 21, 22, 24, 25, 26, 27)] # cleans up the data set
+colnames(voltijd)[6] <- c("2023") #makes the year 2023 instead of 2023*
+
+rownames(voltijd) <- voltijd[, 1]  # Set row names using the first column
+voltijd <- voltijd[,-1]  # Remove the first column if it's no longer needed
+voltijd <- voltijd[-c(1, 2, 4), ] # cleans up the data set
+
+rownames(voltijd)[1] <- "Werkzame beroepsbevolking met full time jobs|Gemiddeld persoonlijk inkomen"
+voltijd[] <- lapply(voltijd, function(x) as.numeric(gsub(",", ".", x)))
+
+data <- data[-c(1, 2, 4), ] # cleans up the data set
+
+data <- rbind(data[1, ], voltijd, data[2:nrow(data), ])
+
+new_row_vol <- data[6, ] / data[2,]  # Element-wise division
+rownames(new_row_vol) <- "Houseprices in Netherlands relative to Avg personal full time income"
+data <- rbind(data[1:5, ], new_row_vol, data[6:nrow(data), ])
+
+graph_data <- data.frame(
+  Year = colnames(data)[1:5],  # Extract year labels
+  Value = as.numeric(data[6, 1:5])  # Convert row values to numeric
+)
+
+ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
+  geom_line(color = "blue", linewidth = 1) +
+  geom_point(color = "red", size = 2) +
+  labs(
+    title = "Houseprices in Netherlands Relative to Personal full time Income",
+    x = "Year",
+    y = "Relative Value"
+  ) +
+  theme_bw()
