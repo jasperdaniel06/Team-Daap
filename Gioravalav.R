@@ -46,7 +46,7 @@ ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `gro
   geom_line(color = "blue", linewidth = 1) +
   geom_point(color = "red", size = 2) +
   labs(
-    title = "Houseprices in Netherland Relative to Personal Income",
+    title = "Houseprices in Netherlands Relative to Personal Income",
     x = "Year",
     y = "Relative Value"
   ) +
