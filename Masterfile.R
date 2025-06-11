@@ -1,5 +1,4 @@
 #Init
-setwd()
 
-source("Gioravalav.R")
+source("Gioravalav.R", echo = TRUE)
 source("Spatial.R")
