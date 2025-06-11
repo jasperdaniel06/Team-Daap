@@ -1,0 +1,17 @@
+Identifier;MeasureGroupId;Index;Title;Description;DataType;Unit;Decimals;PresentationType
+M002292;;3;Oprichtingen van vestigingen;"Een oprichting van een vestiging betreft alle vestigingen die behoren bij de oprichting van een nieuw bedrijf. Dit betekent dat voldaan moet zijn aan economische criteria voor een bedrijf. Dit betekent dat informatie beschikbaar is over werkgelegenheid of omzet van het bedrijf. Verder is het van belang dat het bedrijf nieuw is. De voortzetting van één of meer bestaande bedrijven is geen oprichting.
+
+Niet als oprichting worden beschouwd:
+- ontstaan als gevolg van fusie, op- of afsplitsing;
+- overname of verzelfstandiging van een deel van een bedrijf;
+- naamswijziging;
+- rechtsvormwijziging;
+- eigenaarwisseling;
+- geleidelijke activiteitenwijziging;
+- verhuizing met behoud van afzetmarkt;
+- reactivering.
+
+Wel is er sprake van een oprichting als:
+- het productieproces (de activiteit) ingrijpend wordt gewijzigd;
+- een verhuizing plaatsvindt met opbouw van een nieuwe afzetmarkt.
+";Long;aantal;0;Absolute

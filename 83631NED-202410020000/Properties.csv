@@ -1,0 +1,112 @@
+Identifier;Title;Description;Modified;ReleaseDate;ModificationDate;Language;TemporalCoverage;Authority;Catalog;Publisher;ContactPoint;Version;VersionNotes;VersionReason;Frequency;Status;ObservationCount;ObservationsModified;DatasetType;GraphTypes;License;Source;Summary;LongDescription
+83631NED;"Vestigingen van bedrijven; oprichtingen, bedrijfstak, regio";"In deze tabel vindt u gegevens over het aantal oprichtingen van vestigingen van bedrijven. Bedrijven die voor het eerst actief worden kunnen meerdere locaties hebben waar de bedrijfsactiviteiten worden uitgevoegd. Al deze geopende bedrijfsvestigingen worden hier afzonderlijk geteld.
+
+De gegevens zijn beschikbaar naar economische activiteit, gebaseerd op de Standaard Bedrijfsindeling 2008 (SBI 2008). De gegevens zijn daarnaast beschikbaar naar regio gebaseerd op de regionale indeling per 1 januari van het verslagjaar.
+
+Gegevens beschikbaar vanaf: 2007
+
+Status van de cijfers:
+De cijfers tot en met 2021 zijn definitief, de cijfers over 2022 zijn nader voorlopig en de cijfers over 2023 zijn voorlopig.
+
+Wijzigingen per 2 oktober 2024:
+De voorlopige cijfers over 2023 zijn toegevoegd, de cijfers over 2022 zijn bijgesteld en zijn nu nader voorlopig. De cijfers over 2021 zijn nu definitief.
+
+Wanneer komen er nieuwe cijfers?
+De nieuwe cijfers komen doorgaans 3 maanden na afloop van het verslag jaar beschikbaar.
+
+
+";2024-10-02T00:00:00+02:00;2024-10-02T00:00:00+02:00;2024-10-02T00:00:00+02:00;nl;2007 - 2023;https://standaarden.overheid.nl/owms/terms/Centraal_Bureau_voor_de_Statistiek;CBS;https://standaarden.overheid.nl/owms/terms/Centraal_Bureau_voor_de_Statistiek;infoservice@cbs.nl;202410020000;;Actualisering;Per jaar;Regulier;128898;2024-10-02T00:00:00+02:00;Numeric;Table,Bar,Line,Map;https://creativecommons.org/licenses/by/4.0/;CBS.;"Oprichtingen van vestigingen van bedrijven naar bedrijfstakken/branches 
+(SBI 2008) per regio.";"INHOUDSOPGAVE
+
+1. Toelichting
+2. Definities en verklaring van symbolen
+3. Koppelingen naar relevante tabellen en artikelen
+4. Bronnen en methoden
+5. Meer informatie 
+
+
+1. TOELICHTING
+
+In deze tabel vindt u gegevens over het aantal oprichtingen van vestigingen van bedrijven. Bedrijven die voor het eerst actief worden kunnen meerdere locaties hebben waar de bedrijfsactiviteiten worden uitgevoegd. Al deze geopende bedrijfsvestigingen worden hier afzonderlijk geteld.
+
+De gegevens zijn beschikbaar naar economische activiteit, gebaseerd op de Standaard Bedrijfsindeling 2008 (SBI 2008). De gegevens zijn daarnaast beschikbaar naar regio gebaseerd op de regionale indeling per 1 januari van het verslagjaar.
+
+Gegevens beschikbaar vanaf: 2007
+
+Status van de cijfers:
+De cijfers tot en met 2021 zijn definitief, de cijfers over 2022 zijn nader voorlopig en de cijfers over 2023 zijn voorlopig.
+
+Wijzigingen per 2 oktober 2024:
+De voorlopige cijfers over 2023 zijn toegevoegd, de cijfers over 2022 zijn bijgesteld en zijn nu nader voorlopig. De cijfers over 2021 zijn nu definitief.
+
+Wanneer komen er nieuwe cijfers?
+De nieuwe cijfers komen doorgaans 3 maanden na afloop van het verslag jaar beschikbaar.
+
+
+2. DEFINITIES EN VERKLARING VAN SYMBOLEN
+
+Definities:
+
+Vestiging:
+Elke afzonderlijk gelegen ruimte, afzonderlijk gelegen terrein of complex van ruimten of terreinen, benut door een bedrijf voor uitoefening van de bedrijfsactiviteiten. Ieder bedrijf bestaat uit tenminste één vestiging. Meerdere locaties van een bedrijf binnen één postcodegebied worden beschouwd als één vestiging.
+
+Opgerichte vestiging:
+Een opgerichte vestiging betreft een vestiging die is geopend gelijktijdig met de oprichting van het bedrijf waartoe de vestiging behoort.
+
+Dit betekent dat voldaan moet zijn aan economische criteria voor een bedrijf: er moet informatie beschikbaar zijn over werkgelegenheid of omzet van het bedrijf. Verder is het van belang dat het bedrijf daadwerkelijk nieuw is. De voortzetting van één of meerdere bestaande bedrijven is dan ook geen oprichting.
+
+Er is geen sprake van een oprichting bij:
+- bedrijven die ontstaan als gevolg van fusie, op- of afsplitsing;
+- overname of verzelfstandiging van een deel van een bedrijf;
+- naamswijziging;
+- rechtsvormwijziging;
+- wisseling van eigenaar;
+- geleidelijke activiteitenwijziging;
+- verhuizing;
+- reactivering.
+
+Standaard Bedrijfsindeling 2008 (SBI 2008):
+De Nederlandse hiërarchische indeling van economische activiteiten die door het CBS wordt gebruikt om bedrijfseenheden in te delen naar hun hoofdactiviteit. De SBI 2008 is de versie die vanaf 2008 gebruikt wordt.
+
+'Bedrijfstak' of 'branche' zijn gangbare termen voor groepen van bedrijven met dezelfde hoofdactiviteit. Het CBS hanteert voor de indeling van bedrijven naar hoofdactiviteit de zogenoemde Standaard Bedrijfsindeling (SBI). Bedrijven in een bedrijfstak of branche kunnen naast deze activiteit ook andere activiteiten (nevenactiviteiten) uitoefenen.
+De SBI 2008 kent meerdere niveaus die aangegeven worden door maximaal vijf cijfers. Het niveau van vier cijfers komt vrijwel overeen met de indeling van de Europese Unie (NACE). De eerste twee cijfers komen overeen met die van de indeling van Verenigde Naties (ISIC).
+
+Verklaring van symbolen:
+
+niets (blanco) : het cijfer kan op logische gronden niet voorkomen
+. : het cijfer is onbekend, onvoldoende betrouwbaar of geheim
+* : voorlopige cijfers
+** : nader voorlopige cijfers
+
+Het aantal oprichtingen van vestigingen is afgerond op een veelvoud van vijf.
+In geval van afrondingen kan het voorkomen, dat de totalen niet geheel overeenstemmen met de som der opgetelde getallen.
+
+
+3. KOPPELINGEN NAAR RELEVANTE TABELLEN EN ARTIKELEN
+
+Relevante tabellen:
+
+Informatie over het totaal aantal vestigingen in Nederland is te vinden in de volgende tabellen:
+<a href='https://opendata.cbs.nl/statline/#/CBS/nl/dataset/81578ned'>Vestigingen van bedrijven; bedrijfstak, regio</a>
+<a href='https://opendata.cbs.nl/statline/#/CBS/nl/dataset/81644ned'>Vestigingen van bedrijven; grootte, rechtsvorm, bedrijfstak, regio</a>
+<a href='https://opendata.cbs.nl/statline/#/CBS/nl/dataset/81575ned'>Vestigingen van bedrijven; bedrijfstak, gemeente</a>
+
+Informatie over het aantal opheffingen van vestigingen in Nederland is te vinden in de volgende tabel:
+<a href='https://opendata.cbs.nl/statline/#/CBS/nl/dataset/83635ned'>Vestigingen van bedrijven; opheffingen, bedrijfstak, regio</a>
+
+Informatie over het aantal oprichtingen van bedrijven in Nederland is te vinden in de volgende tabel:
+<a href='https://opendata.cbs.nl/statline/#/CBS/nl/dataset/83148ned'>Bedrijven; oprichtingen, bedrijfsgrootte, rechtsvorm, bedrijfstak</a>
+
+
+4. BRONNEN EN METHODEN
+
+De onderzoeksmethode van deze tabel is te vinden in de onderzoeksbeschrijving <a href='https://www.cbs.nl/nl-nl/onze-diensten/methoden/onderzoeksomschrijvingen/korte-onderzoeksbeschrijvingen/vestigingendynamiek'>Vestigingendynamiek</a>.
+
+
+5. MEER INFORMATIE
+
+<a href='https://www.cbs.nl/nl-nl/over-ons/contact/infoservice'>Infoservice
+
+</a>Copyright (c) Centraal Bureau voor de Statistiek, Den Haag/Heerlen 
+Verveelvoudiging is toegestaan, mits CBS als bron wordt vermeld.
+"

@@ -1,0 +1,4 @@
+Identifier;Title;Description;MapYear;ReleasePolicy;Kind;ContainsGroups;ContainsCodes;CodesUrl;GroupsUrl
+BedrijfstakkenBranchesSBI2008;Bedrijfstakken/branches (SBI 2008);;;;Dimension;True;True;BedrijfstakkenBranchesSBI2008Codes.csv;BedrijfstakkenBranchesSBI2008Groups.csv
+RegioS;Regio's;;;;GeoDimension;True;True;RegioSCodes.csv;RegioSGroups.csv
+Perioden;Perioden;;;True;TimeDimension;True;True;PeriodenCodes.csv;PeriodenGroups.csv
