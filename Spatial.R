@@ -22,6 +22,6 @@ data2 <- inner_join(provincie_2020, data2, by = 'Regio.s')
 ggplot(data2) +
   geom_sf(aes(fill = `2020`)) +  # Mapping values from the 2020 column
   theme_minimal() +
-  labs(title = "Map of Data", fill = "Values in 2020")
+  labs(title = "Map of House prices per region", fill = "House prices in 2020")
 
 
