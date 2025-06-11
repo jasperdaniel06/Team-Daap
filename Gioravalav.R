@@ -53,7 +53,7 @@ ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `gro
   theme_bw()
 
 
-# code to find out what house prices had the most relative changes
+
 data2[] <- lapply(data2, function(x) as.numeric(as.character(x))) # makes the characters of all the numbers into numeric in the old data2
 dif <- c() # give variable dif the value of a vector
 
@@ -82,13 +82,13 @@ data <- data[-c(1, 2, 4), ] # cleans up the data set
 
 data <- rbind(data[1, ], voltijd, data[2:nrow(data), ])
 
-new_row_vol <- data[6, ] / data[2,]  # Element-wise division
+new_row_vol <- data[4, ] / data[2,]  # Element-wise division
 rownames(new_row_vol) <- "Houseprices in Netherlands relative to Avg personal full time income"
-data <- rbind(data[1:5, ], new_row_vol, data[6:nrow(data), ])
+data <- rbind(data[1:2, ], new_row_vol, data[3:nrow(data), ])
 
 graph_data <- data.frame(
   Year = colnames(data)[1:5],  # Extract year labels
-  Value = as.numeric(data[6, 1:5])  # Convert row values to numeric
+  Value = as.numeric(data[3, 1:5])  # Convert row values to numeric
 )
 
 ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
