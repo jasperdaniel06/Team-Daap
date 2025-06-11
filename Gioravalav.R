@@ -5,7 +5,7 @@ data2 <- read.csv("wozdata.csv")
 View(data2)
 
 colnames(data2) <- data2[3, ] # turns the column names in the years
-data2 <- data2[-c(1:5), -c(1, 2, 5:7, 9:11, 13:15, 17:19, 21:23)] #verwijdert onnodige columns en rows
+data2 <- data2[-c(1:5, 18:379), -c(1, 2, 5:7, 9:11, 13:15, 17:19, 21:23)] #verwijdert onnodige columns en rows
 data2 <- na.omit(data2)  # Removes all rows that contain NA values
 rownames(data2) <- data2[, 1]  # Set row names using the first column
 data2 <- data2[, -1]  # Remove the first column if it's no longer needed
@@ -53,7 +53,7 @@ ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `gro
   theme_bw()
 
 
-# code to find out what house prices had the most relative changes
+
 data2[] <- lapply(data2, function(x) as.numeric(as.character(x))) # makes the characters of all the numbers into numeric in the old data2
 dif <- c() # give variable dif the value of a vector
 
@@ -63,58 +63,6 @@ for(i in 1:nrow(data2))
 }
 
 data2 <- cbind(data2, dif) # add the dif variable to the data2 dataset
-
-slice_max(data2, dif) # finds max relative difference
-slice_min(data2, dif) # finds min relative difference
-
-# code to find houseprices relative to income in these places
-rownumber_lel <- which(rownames(data) == "Lelystad")
-rownumber_hor <- which(rownames(data) == "Horst aan de Maas")
-rownumber_lel
-rownumber_hor
-
-new_row_lel <- data[178, ] / data[3,]  # Element-wise division
-new_row_hor <- data[156, ] / data[3,]  # Element-wise division
-
-rownames(new_row_lel) <- "Houseprices in Lelystad relative to Avg personal income"
-rownames(new_row_hor) <- "Houseprices in Horst aan de Maas relative to Avg personal income"
-
-data <- rbind(data[1:5, ], new_row_lel, data[6:nrow(data), ])
-data <- rbind(data[1:6, ], new_row_hor, data[7:nrow(data), ])
-
-# under here is the code to plot the new row 
-
-graph_data <- data.frame(
-  Year = colnames(data)[1:5],  # Extract year labels
-  Value = as.numeric(data[6, 1:5])  # Convert row values to numeric
-)
-
-ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
-  geom_line(color = "blue", linewidth = 1) +
-  geom_point(color = "red", size = 2) +
-  labs(
-    title = "Houseprices in Lelystad Relative to Personal Income",
-    x = "Year",
-    y = "Relative Value"
-  ) +
-  theme_bw()
-
-# under here is the code to plot the new row 
-
-graph_data <- data.frame(
-  Year = colnames(data)[1:5],  # Extract year labels
-  Value = as.numeric(data[7, 1:5])  # Convert row values to numeric
-)
-
-ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
-  geom_line(color = "blue", linewidth = 1) +
-  geom_point(color = "red", size = 2) +
-  labs(
-    title = "Houseprices in Horst aan de Maas Relative to Personal Income",
-    x = "Year",
-    y = "Relative Value"
-  ) +
-  theme_bw()
 
 voltijd <- read.csv("inkdata.csv")
 View(voltijd)
@@ -134,13 +82,13 @@ data <- data[-c(1, 2, 4), ] # cleans up the data set
 
 data <- rbind(data[1, ], voltijd, data[2:nrow(data), ])
 
-new_row_vol <- data[6, ] / data[2,]  # Element-wise division
+new_row_vol <- data[4, ] / data[2,]  # Element-wise division
 rownames(new_row_vol) <- "Houseprices in Netherlands relative to Avg personal full time income"
-data <- rbind(data[1:5, ], new_row_vol, data[6:nrow(data), ])
+data <- rbind(data[1:2, ], new_row_vol, data[3:nrow(data), ])
 
 graph_data <- data.frame(
   Year = colnames(data)[1:5],  # Extract year labels
-  Value = as.numeric(data[6, 1:5])  # Convert row values to numeric
+  Value = as.numeric(data[3, 1:5])  # Convert row values to numeric
 )
 
 ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
