@@ -64,6 +64,56 @@ for(i in 1:nrow(data2))
 
 data2 <- cbind(data2, dif) # add the dif variable to the data2 dataset
 
+slice_max(data2, dif) # finds max relative difference
+slice_min(data2, dif) # finds min relative difference
+
+# code to find houseprices relative to income in these places
+rownumber_fle <- which(rownames(data) == "Flevoland (PV)")
+rownumber_zee <- which(rownames(data) == "Zeeland (PV)")
+rownumber_fle
+rownumber_zee
+
+new_row_fle <- data[11, ] / data[3,]  # Element-wise division
+new_row_zee <- data[16, ] / data[3,]  # Element-wise division
+
+rownames(new_row_fle) <- "Houseprices in Flevoland relative to Avg personal income"
+rownames(new_row_zee) <- "Houseprices in Zeeland relative to Avg personal income"
+
+data <- rbind(data[1:5, ], new_row_fle, data[6:nrow(data), ])
+data <- rbind(data[1:6, ], new_row_zee, data[7:nrow(data), ])
+
+graph_data <- data.frame(
+  Year = colnames(data)[1:5],  # Extract year labels
+  Value = as.numeric(data[6, 1:5])  # Convert row values to numeric
+)
+
+ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
+  geom_line(color = "blue", linewidth = 1) +
+  geom_point(color = "red", size = 2) +
+  labs(
+    title = "Houseprices in Flevoland Relative to Personal Income",
+    x = "Year",
+    y = "Relative Value"
+  ) +
+  theme_bw()
+
+# under here is the code to plot the new row 
+
+graph_data <- data.frame(
+  Year = colnames(data)[1:5],  # Extract year labels
+  Value = as.numeric(data[7, 1:5])  # Convert row values to numeric
+)
+
+ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
+  geom_line(color = "blue", linewidth = 1) +
+  geom_point(color = "red", size = 2) +
+  labs(
+    title = "Houseprices in Zeeland Relative to Personal Income",
+    x = "Year",
+    y = "Relative Value"
+  ) +
+  theme_bw()
+
 voltijd <- read.csv("inkdata.csv")
 View(voltijd)
 
@@ -82,7 +132,7 @@ data <- data[-c(1, 2, 4), ] # cleans up the data set
 
 data <- rbind(data[1, ], voltijd, data[2:nrow(data), ])
 
-new_row_vol <- data[4, ] / data[2,]  # Element-wise division
+new_row_vol <- data[6, ] / data[2,]  # Element-wise division
 rownames(new_row_vol) <- "Houseprices in Netherlands relative to Avg personal full time income"
 data <- rbind(data[1:2, ], new_row_vol, data[3:nrow(data), ])
 
