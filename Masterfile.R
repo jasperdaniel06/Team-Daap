@@ -1,4 +1,4 @@
 #Init
 
 source("Gioravalav.R", echo = TRUE)
-source("Spatial.R")
+source("Spatial.R", echo = TRUE)
