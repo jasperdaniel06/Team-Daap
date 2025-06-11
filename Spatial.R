@@ -15,4 +15,5 @@ data2$Regio.s <- row.names(data2)
 colnames(provincie_2020)[2] <- "Regio.s"
 data2$Regio.s <- gsub(" \\(PV\\)", "", data2$Regio.s)
 data2$Regio.s <- gsub("Fryslân", "Friesland", data2$Regio.s)
-inner_join(provincie_2020, data2, by = 'Regio.s')
+data2 <- inner_join(provincie_2020, data2, by = 'Regio.s')
+
