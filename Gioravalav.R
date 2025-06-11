@@ -5,7 +5,7 @@ data2 <- read.csv("wozdata.csv")
 View(data2)
 
 colnames(data2) <- data2[3, ] # turns the column names in the years
-data2 <- data2[-c(1:5, 18:379), -c(1, 2, 5:7, 9:11, 13:15, 17:19, 21:23)] #verwijdert onnodige columns en rows
+data2 <- data2[-c(1:5, 19:379), -c(1, 2, 5:7, 9:11, 13:15, 17:19, 21:23)] #verwijdert onnodige columns en rows
 data2 <- na.omit(data2)  # Removes all rows that contain NA values
 rownames(data2) <- data2[, 1]  # Set row names using the first column
 data2 <- data2[, -1]  # Remove the first column if it's no longer needed
