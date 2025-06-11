@@ -24,7 +24,7 @@ unique(buzyness$Regio.s)
 library(dplyr)
 
 buzyness <- buzyness %>%
-  rename(Bedrijfstak = `bedrijfstak`)
+  rename(Bedrijfstak = "Bedrijfstakken.branches..SBI.2008.")
 colnames(buzyness)
 buzyness <- buzyness %>%
   rename('Nieuwe bedrijven' = 'Oprichtingen.van.vestigingen..aantal.')
