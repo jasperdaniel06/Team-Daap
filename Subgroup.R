@@ -25,9 +25,16 @@ library(dplyr)
 
 buzyness <- buzyness %>%
   rename(Bedrijfstak = "Bedrijfstakken.branches..SBI.2008.")
-colnames(buzyness)
 buzyness <- buzyness %>%
   rename('Nieuwe bedrijven' = 'Oprichtingen.van.vestigingen..aantal.')
-  colnames(buzyness)
+  
 buzyness <- filter(buzyness, Perioden == '2020', Bedrijfstak == 'A-U Alle economische activiteiten')
+buzyness <- buzyness[-c(1, 14),]
+buzyness$Regio.s <- gsub(' ', "", buzyness$Regio.s)
+
+data2 <- inner_join(buzyness, data2, by = 'Regio.s')
+
+unique(buzyness$Regio.s)
+
+unique(data2$Regio.s)
 
