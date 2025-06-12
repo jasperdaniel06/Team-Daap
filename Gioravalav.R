@@ -46,7 +46,7 @@ ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `gro
   geom_line(color = "blue", linewidth = 1) +
   geom_point(color = "red", size = 2) +
   labs(
-    title = "Houseprices in Netherlands Relative to Personal Income",
+    title = "Houseprices Relative to Avg Personal Income in The Netherlands",
     x = "Year",
     y = "Relative Value"
   ) +
@@ -68,13 +68,25 @@ slice_max(data2, dif) # finds max relative difference
 slice_min(data2, dif) # finds min relative difference
 
 # code to find houseprices relative to income in these places
+
+zeefle <- read.csv2("zeefle.csv")
+View(zeefle)
+rownames(zeefle)[1] <- "Gemiddeld persoonlijk inkomen in Flevoland"
+rownames(zeefle)[2] <- "Gemiddeld persoonlijk inkomen in Zeeland"
+zeefle <- zeefle[, -c(1:4, 6:9, 11:14, 16:19, 21:24)]
+colnames(zeefle) <- c("2019", "2020", "2021", "2022", "2023")
+
+zeefle[] <- lapply(zeefle, function(x) as.numeric(as.character(x))) # makes the characters of all the numbers into numeric
+
+data <- rbind(data, zeefle)
+
 rownumber_fle <- which(rownames(data) == "Flevoland (PV)")
 rownumber_zee <- which(rownames(data) == "Zeeland (PV)")
 rownumber_fle
 rownumber_zee
 
-new_row_fle <- data[11, ] / data[3,]  # Element-wise division
-new_row_zee <- data[16, ] / data[3,]  # Element-wise division
+new_row_fle <- data[11, ] / data[19,]  # Element-wise division
+new_row_zee <- data[16, ] / data[20,]  # Element-wise division
 
 rownames(new_row_fle) <- "Houseprices in Flevoland relative to Avg personal income"
 rownames(new_row_zee) <- "Houseprices in Zeeland relative to Avg personal income"
@@ -91,7 +103,7 @@ ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `gro
   geom_line(color = "blue", linewidth = 1) +
   geom_point(color = "red", size = 2) +
   labs(
-    title = "Houseprices in Flevoland Relative to Personal Income",
+    title = "Houseprices Relative to Avg Personal Income in Flevoland",
     x = "Year",
     y = "Relative Value"
   ) +
@@ -108,44 +120,29 @@ ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `gro
   geom_line(color = "blue", linewidth = 1) +
   geom_point(color = "red", size = 2) +
   labs(
-    title = "Houseprices in Zeeland Relative to Personal Income",
+    title = "Houseprices Relative to Avg Personal Income in Zeeland",
     x = "Year",
     y = "Relative Value"
   ) +
   theme_bw()
 
-voltijd <- read.csv("inkdata.csv")
-View(voltijd)
-
-colnames(voltijd) <- voltijd[5, ] # turns the column names in a year
-voltijd <- voltijd[-c(1, 2, 3, 4, 5, 6, 11), -c(1, 3, 4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16, 17, 19, 20, 21, 22, 24, 25, 26, 27)] # cleans up the data set
-colnames(voltijd)[6] <- c("2023") #makes the year 2023 instead of 2023*
-
-rownames(voltijd) <- voltijd[, 1]  # Set row names using the first column
-voltijd <- voltijd[,-1]  # Remove the first column if it's no longer needed
-voltijd <- voltijd[-c(1, 2, 4), ] # cleans up the data set
-
-rownames(voltijd)[1] <- "Werkzame beroepsbevolking met full time jobs|Gemiddeld persoonlijk inkomen"
-voltijd[] <- lapply(voltijd, function(x) as.numeric(gsub(",", ".", x)))
-
-data <- data[-c(1, 2, 4), ] # cleans up the data set
-
-data <- rbind(data[1, ], voltijd, data[2:nrow(data), ])
-
-new_row_vol <- data[6, ] / data[2,]  # Element-wise division
-rownames(new_row_vol) <- "Houseprices in Netherlands relative to Avg personal full time income"
-data <- rbind(data[1:2, ], new_row_vol, data[3:nrow(data), ])
-
+# Create a dataframe with values from rows 5, 6, and 7
 graph_data <- data.frame(
-  Year = colnames(data)[1:5],  # Extract year labels
-  Value = as.numeric(data[3, 1:5])  # Convert row values to numeric
+  Year = colnames(data)[1:5],  # Extract years
+  Netherlands = as.numeric(data[5, 1:5]),  # Row 5: Netherlands
+  Flevoland = as.numeric(data[6, 1:5]),  # Row 6: Flevoland
+  Zeeland = as.numeric(data[7, 1:5])   # Row 7: Zeeland
 )
 
-ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
-  geom_line(color = "blue", linewidth = 1) +
-  geom_point(color = "red", size = 2) +
+# Convert data to long format
+graph_data_long <- pivot_longer(graph_data, cols = -Year, names_to = "Region", values_to = "Value")
+
+# Create the multi-line plot
+ggplot(graph_data_long, aes(x = Year, y = Value, color = Region, group = Region)) + 
+  geom_line(linewidth = 1) + 
+  geom_point(size = 2) + 
   labs(
-    title = "Houseprices in Netherlands Relative to Personal full time Income",
+    title = "House Prices Relative to Average Personal Income (2019-2023)",
     x = "Year",
     y = "Relative Value"
   ) +
