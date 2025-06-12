@@ -8,7 +8,6 @@ str(cbs_maps)
 
 provincie_2020 <- cbs_get_sf("provincie", 2020)
 str(provincie_2020) # sf object
-View(provincie_2020)
 
 
 data2$Regio.s <- row.names(data2)

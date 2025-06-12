@@ -1,5 +1,4 @@
 buzyness <- read.csv('buzyness.csv')
-view(buzyness)
 buzyness$Regio.s <- gsub('\\(PV\\)', '', buzyness$Regio.s)
 library(dplyr)
 
@@ -65,8 +64,6 @@ df_2019 <- cbind(df_2019, busi) # add the dif variable to the data2 dataset
 
 
 
-view(df_2023)
-view(df_2019)
 
 data2 <- inner_join(df_2019, data2, by = 'Regio.s')
 
