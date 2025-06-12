@@ -70,13 +70,13 @@ view(df_2019)
 
 data2 <- inner_join(df_2019, data2, by = 'Regio.s')
 
-
+data2 <- arrange(data2, busi)
 
 # Create the clean dataframe from your dataset
 df <- data.frame(
-  Province = data2$Regio.s,
-  Growth_Rate_New_Companies = data2$`busi`,
-  WOZ_change = data2$`dif`
+  Province = data2[1:4, 3],
+  Growth_Rate_New_Companies = data2[1:4, 8],
+  WOZ_change = data2[1:4, 19]
 )
 
 # Pivot to long format
@@ -86,7 +86,45 @@ df_long <- pivot_longer(df, cols = c(Growth_Rate_New_Companies, WOZ_change),
 # Plot: side-by-side bars per province
 ggplot(df_long, aes(x = Province, y = Value, fill = Type)) +
   geom_bar(stat = "identity", position = "dodge") +
-  labs(title = "Growth of new companies and change in WOZ value per province 2019-2023",
+  labs(title = "Growth of new companies and change in WOZ value per province \n(2019-2023, bottom 4)",
+       x = "Province", y = "Value") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+df <- data.frame(
+  Province = data2[5:8, 3],
+  Growth_Rate_New_Companies = data2[5:8, 8],
+  WOZ_change = data2[5:8, 19]
+)
+
+# Pivot to long format
+df_long <- pivot_longer(df, cols = c(Growth_Rate_New_Companies, WOZ_change),
+                        names_to = "Type", values_to = "Value")
+
+# Plot: side-by-side bars per province
+ggplot(df_long, aes(x = Province, y = Value, fill = Type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Growth of new companies and change in WOZ value per province \n(2019-2023, middle 4)",
+       x = "Province", y = "Value") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+df <- data.frame(
+  Province = data2[9:12, 3],
+  Growth_Rate_New_Companies = data2[9:12, 8],
+  WOZ_change = data2[9:12, 19]
+)
+
+# Pivot to long format
+df_long <- pivot_longer(df, cols = c(Growth_Rate_New_Companies, WOZ_change),
+                        names_to = "Type", values_to = "Value")
+
+# Plot: side-by-side bars per province
+ggplot(df_long, aes(x = Province, y = Value, fill = Type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Growth of new companies and change in WOZ value per province \n(2019-2023, top 4)",
        x = "Province", y = "Value") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
