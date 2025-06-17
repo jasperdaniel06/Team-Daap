@@ -69,6 +69,17 @@ data2 <- inner_join(df_2019, data2, by = 'Regio.s')
 
 data2 <- arrange(data2, busi)
 
+busi <- sort(busi)
+
+# made the data for the barplots
+bottom <- mean(busi[1:4])
+middle <- mean(busi[5:8])
+top <- mean(busi[9:12])
+
+bottom_woz <- mean(data2[1:4, 19])
+middle_woz <- mean(data2[5:8, 19])
+top_woz <- mean(data2[9:12, 19])
+
 # Create the clean dataframe from your dataset
 df <- data.frame(
   Province = data2[1:4, 3],
@@ -126,3 +137,18 @@ ggplot(df_long, aes(x = Province, y = Value, fill = Type)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
+
+
+#test bar plot
+data <- data.frame(
+  Group = c("Bottom 4", "Middle 4", "Top 4"),
+  Category = rep(c("Growth of New Companies", "Change in WOZ"), each = 3),
+  Value = c(bottom, middle, top, bottom_woz, middle_woz, top_woz)
+)
+
+# Create the double bar plot
+ggplot(data, aes(x = Group, y = Value, fill = Category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_minimal() +
+  labs(title = "Growth of New Companies and WOZ change for the 3 groups", 
+       x = "Group", y = "Average Value", fill = "Category")
