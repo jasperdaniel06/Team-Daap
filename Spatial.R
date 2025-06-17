@@ -20,14 +20,14 @@ data2 <- inner_join(provincie_2020, data2, by = 'Regio.s')
 # Create the map using ggplot2
 ggplot(data2) +
   geom_sf(aes(fill = `2020`)) +  # Mapping values from the 2020 column
-  scale_fill_gradient(low = "blue", high = "red") +
+  scale_fill_gradient(low = "blue", high = "red", limits = c(150, 500)) +
   theme_minimal() +
   labs(title = "Map of House prices per region", fill = "House prices in 2020\nx1000 in euros")
 
 # Create the map using ggplot2
 ggplot(data2) +
   geom_sf(aes(fill = `2023`)) +  # Mapping values from the 2020 column
-  scale_fill_gradient(low = "blue", high = "red") +
+  scale_fill_gradient(low = "blue", high = "red", limits = c(150, 500)) +
   theme_minimal() +
   labs(title = "Map of House prices per region", fill = "House prices in 2023\nx1000 in euros")
 
