@@ -145,3 +145,18 @@ ggplot(graph_data_long, aes(x = Year, y = Value, color = Region, group = Region)
     y = "Relative Value"
   ) +
   theme_bw()
+
+graph_data <- data.frame(
+  Year = colnames(data)[1:5],  # Extract year labels
+  Value = as.numeric(data[8, 1:5])  # Convert row values to numeric
+)
+
+ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
+  geom_line(color = "blue", linewidth = 1) +
+  geom_point(color = "red", size = 2) +
+  labs(
+    title = "Average house prices in the Netherlands",
+    x = "Year",
+    y = "Value"
+  ) +
+  theme_bw()
