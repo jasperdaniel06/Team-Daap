@@ -9,10 +9,22 @@ output: pdf_document
 
 ```{r package_install, include=FALSE}
 install.packages("tidyverse")
+install.packages('ggplot2')
+install.packages('dplyr')
+install.packages('tidyr')
+install.packages('readr')
+install.packages('cbsodataR')
+install.packages('sf')
 ```
 
 ```{r packages}
-require(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(tidyverse)
+library(cbsodataR)
+library(sf)
 ```
 
 # Title Page
