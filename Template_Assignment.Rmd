@@ -95,13 +95,54 @@ Variable 2
 
 ## 3.3 Visualize temporal variation
 
-```{r}
+```{r include=FALSE}
+source("Gioravalav.R", echo = TRUE)
+```
 
+```{r}
+graph_data <- data.frame(
+  Year = colnames(data)[1:5],  # Extract years
+  Netherlands = as.numeric(data[5, 1:5]),  # Row 5: Netherlands
+  Flevoland = as.numeric(data[6, 1:5]),  # Row 6: Flevoland
+  Zeeland = as.numeric(data[7, 1:5])   # Row 7: Zeeland
+)
+
+# Convert data to long format
+graph_data_long <- pivot_longer(graph_data, cols = -Year, names_to = "Region", values_to = "Value")
+
+# Create the multi-line plot
+ggplot(graph_data_long, aes(x = Year, y = Value, color = Region, group = Region)) + 
+  geom_line(linewidth = 1) + 
+  geom_point(size = 2) + 
+  labs(
+    title = "House Prices Relative to Average Personal Income (2019-2023)",
+    x = "Year",
+    y = "Relative Value"
+  ) +
+  theme_bw()
 ```
 
 ## 3.4 Visualize spatial variation
 
+```{r visualise_map, include=FALSE}
+source("Spatial.R", echo = TRUE)
+```
+
 ```{r visualise_map}
+# Create the map using ggplot2
+ggplot(data2) +
+  geom_sf(aes(fill = `2020`)) +  # Mapping values from the 2020 column
+  scale_fill_gradient(low = "blue", high = "red", limits = c(150, 500)) +
+  theme_minimal() +
+  labs(title = "Map of House prices per region", fill = "House prices in 2020\nx1000 in euros")
+
+# Create the map using ggplot2
+ggplot(data2) +
+  geom_sf(aes(fill = `2023`)) +  # Mapping values from the 2020 column
+  scale_fill_gradient(low = "blue", high = "red", limits = c(150, 500)) +
+  theme_minimal() +
+  labs(title = "Map of House prices per region", fill = "House prices in 2023\nx1000 in euros")
+
 
 ```
 
@@ -111,20 +152,23 @@ Here you provide a description of why the plot above is relevant to your specifi
 
 What is the poverty rate by state?
 
+```{r setup visualise_subpopulations, include=FALSE}
+source("Subgroup.R", echo = TRUE)
+```
+
 ```{r visualise_subpopulations}
-dataset$inmetro <- dataset$inmetro %>% as.factor()
-# Boxplot of poverty rate by state using the 'midwest' dataset
-ggplot(dataset, aes(x = inmetro, y = percadultpoverty)) +
-  geom_boxplot() +
-  labs(
-    title = "Distribution of Poverty Rates by Metropolitan status (Midwest counties)",
-    x = "Metropolitan Area",
-    y = "Poverty Rate of Adults (%)"
-  ) +
+data <- data.frame(
+  Group = c("Bottom 4", "Middle 4", "Top 4"),
+  Category = rep(c("Growth of New Companies", "Change in WOZ"), each = 3),
+  Value = c(bottom, middle, top, bottom_woz, middle_woz, top_woz)
+)
+
+# Create the double bar plot
+ggplot(data, aes(x = Group, y = Value, fill = Category)) +
+  geom_bar(stat = "identity", position = "dodge") +
   theme_minimal() +
-  theme(
-    legend.position = "right"
-  )
+  labs(title = "Growth of New Companies and WOZ change for the 3 groups", 
+       x = "Group", y = "Average Value", fill = "Category")
 ```
 
 Here you provide a description of why the plot above is relevant to your specific social problem.
