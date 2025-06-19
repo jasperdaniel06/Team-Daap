@@ -1,6 +1,14 @@
 ---
 title: "Template"
-author: "Studentnames and studentnumbers here"
+author: 
+  - "Mark Barkalov (2782988)"
+  - "Joël Dijkstra (2854215)"
+  - "Shabana Esmati (2868438)"
+  - "Jasper Hoogendoorn (2856970)"
+  - "Giovanni Koek (2857652)"
+  - "Robin Kolmus (2862402)"
+  - "Elijah Kruize (2868400)"
+  - "Tim van der Laan (2854528)"
 date: "`r Sys.Date()`"
 output: pdf_document
 ---
@@ -31,9 +39,29 @@ library(sf)
 
 Include your names
 
+Mark Barkalov (2782988)
+
+Joël Dijkstra (2854215)
+
+Shabana Esmati (2868438)
+
+Jasper Hoogendoorn (2856970)
+
+Giovanni Koek (2857652)
+
+Robin Kolmus (2862402)
+
+Elijah Kruize (2868400)
+
+Tim van der Laan (2854528)
+
 Include the tutorial group number
 
+Group 4
+
 Include your tutorial lecturer's name
+
+Miss. C. Schouwenaar
 
 # Part 1 - Identify a Social Problem
 
@@ -93,16 +121,47 @@ Please use a separate 'R block' of code for each type of cleaning. So, e.g. one 
 
 ## 3.2 Generate necessary variables
 
-Variable 1
+Variable 1: this is a variable for the house to income ratio we used for the Netherlands, Zeeland and Flevoland.
 
-```{r gen_var1}
-
+```{r setup gen_var1, include = FALSE}
+source("Gioravalav.R", echo = TRUE)
 ```
 
-Variable 2
+```{r gen_var1}
+new_row <- data[5, ] / data[3,]  # Element-wise division of average Netherlands house prices divided by average personal income
+new_row_fle <- data[11, ] / data[19,]  # Element-wise division of Flevoland's houseprices divided by the average income in Flevoland
+new_row_zee <- data[16, ] / data[20,]  # Element-wise division of Zeeland's houseprices divided by the average income in Zeeland
+```
+
+Variable 2: This variable is the change in house prices between the years 2023 and 2019 in each province.
+
+```{r setup gen_var2, include = FALSE}
+source("Gioravalav.R", echo = TRUE)
+```
 
 ```{r gen_var2}
+dif <- c() # give variable dif the value of a vector
 
+for(i in 1:nrow(data2))
+{
+  dif[i] = data2$"2023"[i] / data2$"2019"[i] # divides the house prices in 2023 by the houseprices in 2019 
+}
+```
+
+Variable 3: This variable is the calculation of the growth of new businesses in each province
+
+```{r setup gen_var3, include = FALSE}
+source("Spatial.R", echo = TRUE)
+source("Subgroup.R", echo = TRUE)
+```
+
+```{r gen_var3}
+busi <- c() # give variable busi the value of a vector
+
+for(i in 1:nrow(df_2019))
+{
+  busi[i] = df_2019$"Vestigingen (Aantal).x"[i] / df_2019$"Vestigingen (Aantal).y"[i] # Element division  
+}
 ```
 
 ## 3.3 Visualize temporal variation
@@ -162,7 +221,7 @@ Here you provide a description of why the plot above is relevant to your specifi
 
 ## 3.5 Visualize sub-population variation
 
-What is the poverty rate by state?
+Does the growth of new businesses have a direct impact on the change in WOZ value?
 
 ```{r setup visualise_subpopulations, include=FALSE}
 source("Subgroup.R", echo = TRUE)
@@ -203,7 +262,7 @@ Here you provide a description of why the plot above is relevant to your specifi
 
 ## 5.1 Github repository link
 
-Provide the link to your PUBLIC repository here: https://github.com/jasperdaniel06/Team-Daap
+Provide the link to your PUBLIC repository here: <https://github.com/jasperdaniel06/Team-Daap>
 
 ## 5.2 Reference list
 
