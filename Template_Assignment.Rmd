@@ -128,7 +128,7 @@ ggplot(graph_data_long, aes(x = Year, y = Value, color = Region, group = Region)
 source("Spatial.R", echo = TRUE)
 ```
 
-```{r visualise_map}
+```{r setup visualise_map}
 # Create the map using ggplot2
 ggplot(data2) +
   geom_sf(aes(fill = `2020`)) +  # Mapping values from the 2020 column
