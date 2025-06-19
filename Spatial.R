@@ -1,7 +1,3 @@
-library(tidyverse)
-library(cbsodataR)
-library(sf)
-
 cbs_maps <- cbs_get_maps()
 # the layout of the data.frame is:
 str(cbs_maps)

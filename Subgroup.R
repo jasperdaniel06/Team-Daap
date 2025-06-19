@@ -1,6 +1,5 @@
 buzyness <- read.csv('buzyness.csv')
 buzyness$Regio.s <- gsub('\\(PV\\)', '', buzyness$Regio.s)
-library(dplyr)
 
 buzyness <- buzyness %>%
   mutate(Regio.s = if_else(Regio.s == "Fryslân ", "Friesland ", Regio.s))
@@ -19,11 +18,6 @@ data2 <- inner_join(buzyness, data2, by = 'Regio.s')
 unique(buzyness$Regio.s)
 
 unique(data2$Regio.s)
-
-library(ggplot2)
-library(tidyr)
-library(readr)
-library(sf)
 
 
 # Load the CSV

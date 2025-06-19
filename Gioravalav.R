@@ -1,6 +1,3 @@
-library(ggplot2)
-library(tidyverse)
-
 data2 <- read.csv("wozdata.csv")
 
 colnames(data2) <- data2[3, ] # turns the column names in the years
