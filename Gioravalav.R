@@ -151,6 +151,8 @@ graph_data <- data.frame(
 ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
   geom_line(color = "blue", linewidth = 1) +
   geom_point(color = "red", size = 2) +
+  annotate("text", label = "Event from 2013 to 2022", size = 4, x = 2, y = 325) +
+  annotate("rect", xmin = 1, xmax = 4, ymin = 250, ymax = 317, alpha = .2) +
   labs(
     title = "Average house prices in the Netherlands",
     x = "Year",
