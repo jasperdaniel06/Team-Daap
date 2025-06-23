@@ -37,7 +37,7 @@ library(sf)
 
 # Title Page
 
-Include your names
+Include your names:
 
 Mark Barkalov (2782988)
 
@@ -55,11 +55,13 @@ Elijah Kruize (2868400)
 
 Tim van der Laan (2854528)
 
-Include the tutorial group number
+
+Include the tutorial group number:
 
 Group 4
 
-Include your tutorial lecturer's name
+
+Include your tutorial lecturer's name:
 
 Miss. C. Schouwenaar
 
@@ -82,22 +84,34 @@ Include the following:
 Preferably from a URL, but if not, make sure to download the data and store it in a shared location that you can load the data in from. Do not store the data in a folder you include in the Github repository!
 
 ```{r loading_data}
-dataset <- midwest
+data2 <- read.csv("wozdata.csv")
+data <- read.csv("inkdata.csv")
+zeefle <- read.csv2("zeefle.csv")
+provincie_2020 <- cbs_get_sf("provincie", 2020)
+df_2023 <- read_csv2("bedrijvenNL2023.csv", show_col_types=FALSE)
+df_2019 <- read_csv2("bedrijvenNL2019.csv", show_col_types=FALSE)
 ```
 
-midwest is an example dataset included in the tidyverse package
 
 ## 2.2 Provide a short summary of the dataset(s)
+Data2:
+Data2 is a dataset from CBS that mentions the average house prices of houses over the years 2019-2023. This dataset gives us data for the Netherlands, per city and per province. The dataset gives average house prices of houses you can buy and the value of houses that people rent out. We used this dataset to find out what the changes in house prices were over the years.
 
-```{r}
-head(dataset)
-```
+Data and zeefle:
+Data is a dataset from CBS that mentions the average income of groups with different hour contracts over the years 2019-2023 in the Netherlands. It also gives the total average of personal income which we used. We also have the dataset zeefle which is the same as dataset Data but it mentions the average income of Zeeland and Flevoland which we used for the temporal variation.
 
-In this case we see 28 variables, but we miss some information on what units they are in. We also don't know anything about the year/moment in which this data has been captured.
+provincie_2020:
+Dataset provincie_2020 is a dataset from the package cbsodataR that we used to make a map for the spatial variation. It provides the coordinates of every province.
 
-These are things that are usually included in the metadata of the dataset. For your project, you need to provide us with the information from your metadata that we need to understand your dataset of choice.
+df_2023 and df_2019:
+These datasets are from the same dataset from CBS and they give the same information. They provide us with data about the amount of businesses per province but one in the year 2023 and the other in 2019. We used this for our subgroup analysis.
 
 ## 2.3 Describe the type of variables included
+
+The datasets makes use of multiple variables, including:
+ WOZ Value in the Netherlands in each province from 2019 - 2023, Average income of working population in the Netherlands, Zeeland and Flevoland from 2019-2023 and Number of businesses per province in 2019 and 2023
+
+These variables were all from the CBS and these are all administrative sources. 
 
 Think of things like:
 
@@ -105,7 +119,6 @@ Think of things like:
 
 -   Have they been measured by interviewing individuals or is the data coming from administrative sources?
 
-*For the sake of this example, I will continue with the assignment...*
 
 # Part 3 - Quantifying
 
@@ -114,29 +127,162 @@ Think of things like:
 Say we want to include only larger distances (above 2) in our dataset, we can filter for this.
 
 ```{r data_cleaning}
-mean(dataset$percollege)
+
 ```
 
 Please use a separate 'R block' of code for each type of cleaning. So, e.g. one for missing values, a new one for removing unnecessary variables etc.
 
 ## 3.2 Generate necessary variables
 
-Variable 1: this is a variable for the house to income ratio we used for the Netherlands, Zeeland and Flevoland.
+Variable 1: House prices to average personal income ratio. We used this to see how much yearly income is needed to fully purchase the average house in each province and the country as a whole. We did this for the Netherlands and for the provinces Zeeland and Flevoland. For the provinces we used the average personal income in their respective province and for the Netherlands we used the average personal income of the Netherlands as a whole.
 
 ```{r setup gen_var1, include = FALSE}
-source("Gioravalav.R", echo = TRUE)
+data2 <- read.csv("wozdata.csv")
+
+colnames(data2) <- data2[3, ] # turns the column names in the years
+data2 <- data2[-c(1:5, 19:379), -c(1, 2, 5:7, 9:11, 13:15, 17:19, 21:23)] #verwijdert onnodige columns en rows
+data2 <- na.omit(data2)  # Removes all rows that contain NA values
+rownames(data2) <- data2[, 1]  # Set row names using the first column
+data2 <- data2[, -1]  # Remove the first column if it's no longer needed
+
+
+
+
+data <- read.csv("inkdata.csv")
+
+colnames(data) <- data[5, ] # turns the column names in a year
+data <- data[-c(1, 2, 3, 4, 5, 6, 11), -c(1, 3, 5, 6, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 20, 21, 22, 23, 25, 26, 27, 28)] # cleans up the data set by deleting certain columns and rows that are not needed
+rownames(data) <- seq_len(nrow(data)) # unnecessary but makes numbers in the rows correctly into the number of each row
+colnames(data)[6] <- c("2023") #makes the year 2023 instead of 2023*
+
+rownames(data) <- data[, 1]  # Set row names using the first column
+data <- data[,-1]  # Remove the first column if it's no longer needed
+data <- apply(data, 2, function(x) gsub(",", ".", x)) # replaces every comma into a decimal
+
+
+data <- rbind(data, data2) # merges the two data sets
+data[] <- lapply(data, function(x) as.numeric(as.character(x))) # makes the characters of all the numbers into numeric
 ```
 
 ```{r gen_var1}
 new_row <- data[5, ] / data[3,]  # Element-wise division of average Netherlands house prices divided by average personal income
+```
+
+```{r setup gen_var1_2, include = FALSE}
+
+rownames(new_row) <- "Houseprices in Netherland relative to Avg personal income"
+
+data <- rbind(data[1:4, ], new_row, data[5:nrow(data), ])
+
+# under here is the code to plot the new row 
+
+graph_data <- data.frame(
+  Year = colnames(data)[1:5],  # Extract year labels
+  Value = as.numeric(data[5, 1:5])  # Convert row values to numeric
+)
+
+ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
+  geom_line(color = "blue", linewidth = 1) +
+  geom_point(color = "red", size = 2) +
+  labs(
+    title = "Houseprices Relative to Avg Personal Income in The Netherlands",
+    x = "Year",
+    y = "Relative Value"
+  ) +
+  theme_bw()
+
+
+
+data2[] <- lapply(data2, function(x) as.numeric(as.character(x))) # makes the characters of all the numbers into numeric in the old data2
+dif <- c() # give variable dif the value of a vector
+
+for(i in 1:nrow(data2))
+{
+  dif[i] = data2$"2023"[i] / data2$"2019"[i] # divides the house prices in 2023 by the houseprices in 2019 
+}
+
+data2 <- cbind(data2, dif) # add the dif variable to the data2 dataset
+
+slice_max(data2, dif) # finds max relative difference
+slice_min(data2, dif) # finds min relative difference
+
+# code to find houseprices relative to income in these places
+
+zeefle <- read.csv2("zeefle.csv")
+rownames(zeefle)[1] <- "Gemiddeld persoonlijk inkomen in Flevoland"
+rownames(zeefle)[2] <- "Gemiddeld persoonlijk inkomen in Zeeland"
+zeefle <- zeefle[, -c(1:4, 6:9, 11:14, 16:19, 21:24)] # only keeps the average income of Flevoland and Zeeland
+colnames(zeefle) <- c("2019", "2020", "2021", "2022", "2023")
+
+zeefle[] <- lapply(zeefle, function(x) as.numeric(as.character(x))) # makes the characters of all the numbers into numeric
+
+data <- rbind(data, zeefle)
+
+rownumber_fle <- which(rownames(data) == "Flevoland (PV)")
+rownumber_zee <- which(rownames(data) == "Zeeland (PV)")
+rownumber_fle
+rownumber_zee
+```
+
+```{r gen_var1_2}
 new_row_fle <- data[11, ] / data[19,]  # Element-wise division of Flevoland's houseprices divided by the average income in Flevoland
 new_row_zee <- data[16, ] / data[20,]  # Element-wise division of Zeeland's houseprices divided by the average income in Zeeland
 ```
-
-Variable 2: This variable is the change in house prices between the years 2023 and 2019 in each province.
+Variable 2(dif): This variable is the house prices of 2023 divided by the house prices in 2019. This way we can see which city had the most increase during the years. We could find the city with the most increase and the city with the least amount of increase and find out if both cities increased more than the income. We can also use this in the subgroup analysis to find if an increase in businesses has a direct effect on the house prices.
 
 ```{r setup gen_var2, include = FALSE}
-source("Gioravalav.R", echo = TRUE)
+data2 <- read.csv("wozdata.csv")
+
+colnames(data2) <- data2[3, ] # turns the column names in the years
+data2 <- data2[-c(1:5, 19:379), -c(1, 2, 5:7, 9:11, 13:15, 17:19, 21:23)] #verwijdert onnodige columns en rows
+data2 <- na.omit(data2)  # Removes all rows that contain NA values
+rownames(data2) <- data2[, 1]  # Set row names using the first column
+data2 <- data2[, -1]  # Remove the first column if it's no longer needed
+
+
+
+
+data <- read.csv("inkdata.csv")
+
+colnames(data) <- data[5, ] # turns the column names in a year
+data <- data[-c(1, 2, 3, 4, 5, 6, 11), -c(1, 3, 5, 6, 7, 8, 10, 11, 12, 13, 15, 16, 17, 18, 20, 21, 22, 23, 25, 26, 27, 28)] # cleans up the data set by deleting certain columns and rows that are not needed
+rownames(data) <- seq_len(nrow(data)) # unnecessary but makes numbers in the rows correctly into the number of each row
+colnames(data)[6] <- c("2023") #makes the year 2023 instead of 2023*
+
+rownames(data) <- data[, 1]  # Set row names using the first column
+data <- data[,-1]  # Remove the first column if it's no longer needed
+data <- apply(data, 2, function(x) gsub(",", ".", x)) # replaces every comma into a decimal
+
+
+data <- rbind(data, data2) # merges the two data sets
+data[] <- lapply(data, function(x) as.numeric(as.character(x))) # makes the characters of all the numbers into numeric
+
+new_row <- data[5, ] / data[3,]  # Element-wise division of average Netherlands house prices divided by average personal income
+
+rownames(new_row) <- "Houseprices in Netherland relative to Avg personal income"
+
+data <- rbind(data[1:4, ], new_row, data[5:nrow(data), ])
+
+# under here is the code to plot the new row 
+
+graph_data <- data.frame(
+  Year = colnames(data)[1:5],  # Extract year labels
+  Value = as.numeric(data[5, 1:5])  # Convert row values to numeric
+)
+
+ggplot(graph_data, aes(x = Year, y = Value, group = 1)) +  # Explicitly set `group = 1`
+  geom_line(color = "blue", linewidth = 1) +
+  geom_point(color = "red", size = 2) +
+  labs(
+    title = "Houseprices Relative to Avg Personal Income in The Netherlands",
+    x = "Year",
+    y = "Relative Value"
+  ) +
+  theme_bw()
+
+
+
+data2[] <- lapply(data2, function(x) as.numeric(as.character(x))) # makes the characters of all the numbers into numeric in the old data2
 ```
 
 ```{r gen_var2}
@@ -148,11 +294,60 @@ for(i in 1:nrow(data2))
 }
 ```
 
-Variable 3: This variable is the calculation of the growth of new businesses in each province
+Variable 3(busi): This variable is the amount of businesses in each province in 2023 divided by the businesses in 2019. This way we can compare the change in house prices with the change in businesses, to see if an increase in businesses has a direct impact on the house prices in the Netherlands.
 
 ```{r setup gen_var3, include = FALSE}
+source("Gioravalav.R", echo = TRUE)
 source("Spatial.R", echo = TRUE)
-source("Subgroup.R", echo = TRUE)
+
+buzyness <- read.csv('buzyness.csv')
+buzyness$Regio.s <- gsub('\\(PV\\)', '', buzyness$Regio.s)
+
+buzyness <- buzyness %>%
+  mutate(Regio.s = if_else(Regio.s == "Fryslân ", "Friesland ", Regio.s))
+
+buzyness <- buzyness %>%
+  rename(Bedrijfstak = "Bedrijfstakken.branches..SBI.2008.")
+buzyness <- buzyness %>%
+  rename('Nieuwe bedrijven' = 'Oprichtingen.van.vestigingen..aantal.')
+  
+buzyness <- filter(buzyness, Perioden == '2020', Bedrijfstak == 'A-U Alle economische activiteiten')
+buzyness <- buzyness[-c(1, 14),]
+buzyness$Regio.s <- gsub(' ', "", buzyness$Regio.s)
+
+data2 <- inner_join(buzyness, data2, by = 'Regio.s')
+
+unique(buzyness$Regio.s)
+
+unique(data2$Regio.s)
+
+
+# Load the CSV
+df_2023 <- read_csv2("bedrijvenNL2023.csv")
+df_2019 <- read_csv2("bedrijvenNL2019.csv")
+
+df_2023 <- as.data.frame(df_2023)
+df_2019 <- as.data.frame(df_2019)
+
+
+
+df_2023 <- df_2023[-c(13, 14), ]
+df_2019 <- df_2019[-c(13, 14), ]
+
+
+colnames(df_2023)[3] <- "Regio.s"
+df_2023$Regio.s <- gsub(" \\(PV\\)", "", df_2023$Regio.s)
+row.names(df_2023) <- df_2023$Regio.s
+df_2023$Regio.s <- gsub("Fryslân", "Friesland", df_2023$Regio.s)
+
+colnames(df_2019)[3] <- "Regio.s"
+df_2019$Regio.s <- gsub(" \\(PV\\)", "", df_2019$Regio.s)
+row.names(df_2019) <- df_2019$Regio.s
+df_2019$Regio.s <- gsub("Fryslân", "Friesland", df_2019$Regio.s)
+
+
+
+df_2019 <- inner_join(df_2023, df_2019, by = 'Regio.s')
 ```
 
 ```{r gen_var3}
@@ -171,17 +366,6 @@ source("Gioravalav.R", echo = TRUE)
 ```
 
 ```{r}
-graph_data <- data.frame(
-  Year = colnames(data)[1:5],  # Extract years
-  Netherlands = as.numeric(data[5, 1:5]),  # Row 5: Netherlands
-  Flevoland = as.numeric(data[6, 1:5]),  # Row 6: Flevoland
-  Zeeland = as.numeric(data[7, 1:5])   # Row 7: Zeeland
-)
-
-# Convert data to long format
-graph_data_long <- pivot_longer(graph_data, cols = -Year, names_to = "Region", values_to = "Value")
-
-# Create the multi-line plot
 ggplot(graph_data_long, aes(x = Year, y = Value, color = Region, group = Region)) + 
   geom_line(linewidth = 1) + 
   geom_point(size = 2) + 
@@ -213,8 +397,6 @@ ggplot(data2) +
   scale_fill_gradient(low = "blue", high = "red", limits = c(150, 500)) +
   theme_minimal() +
   labs(title = "Map of House prices per region", fill = "House prices in 2023\nx1000 in euros")
-
-
 ```
 
 Here you provide a description of why the plot above is relevant to your specific social problem.
@@ -228,13 +410,6 @@ source("Subgroup.R", echo = TRUE)
 ```
 
 ```{r visualise_subpopulations}
-data <- data.frame(
-  Group = c("Bottom 4", "Middle 4", "Top 4"),
-  Category = rep(c("Growth of New Companies", "Change in WOZ"), each = 3),
-  Value = c(bottom, middle, top, bottom_woz, middle_woz, top_woz)
-)
-
-# Create the double bar plot
 ggplot(data, aes(x = Group, y = Value, fill = Category)) +
   geom_bar(stat = "identity", position = "dodge") +
   theme_minimal() +
