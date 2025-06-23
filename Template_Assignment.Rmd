@@ -55,11 +55,9 @@ Elijah Kruize (2868400)
 
 Tim van der Laan (2854528)
 
-
 Include the tutorial group number:
 
 Group 4
-
 
 Include your tutorial lecturer's name:
 
@@ -71,11 +69,9 @@ Use APA referencing throughout your document.
 
 ## 1.1 Describe the Social Problem
 
-Include the following:
+In recent years it has become obvious that the housing crisis has risen across the developed countries and become a major issue for their residents. Unfortunately, the Netherlands did not become an exception in the current trend. One of the clear indicators of a serious housing problem could serve the WOZ-value, which reflects the official estimated market value of homes, and which has been increasing much faster than the average income. This growing gap makes it more difficult for people, especially first-time buyers and young adults, to afford accommodation. According to recent data (Mouissie & Kraniotis, 2023), there is now a severe shortage of housing across the country — so severe that no single province in the Netherlands had a housing surplus at the moment of 2023. In many places, demand for housing is still far greater than supply. This has made home ownership a distant goal for many Dutch citizens, pushing more people into the rental market, which, as the consequence of increased demand, is also becoming less affordable.
 
--   Why is this relevant?
-
--   ...
+This issue must be taken seriously because it affects both individuals and society as a whole. A lack of affordable housing can reduce people’s quality of life and create long-term financial stress. It can also make it harder for people to move for work or start a family, which affects the economy as a whole. In addition, the growing number of single-person households, due to aging and changing lifestyles, has further increased the pressure on the housing market, while at the same time, building new homes has become more difficult. As a result, as noted in the recent ABN AMRO article (Langen M, 2025), the country is expected to be short by over 400,000 homes in 2025. Given the scale of the problem and its social impact, it is crucial that housing policy is rethought and action is taken to improve affordability. Without intervention, the Dutch housing market will continue to exclude more people from owning a home.
 
 # Part 2 - Data Sourcing
 
@@ -92,33 +88,27 @@ df_2023 <- read_csv2("bedrijvenNL2023.csv", show_col_types=FALSE)
 df_2019 <- read_csv2("bedrijvenNL2019.csv", show_col_types=FALSE)
 ```
 
-
 ## 2.2 Provide a short summary of the dataset(s)
-Data2:
-Data2 is a dataset from CBS that mentions the average house prices of houses over the years 2019-2023. This dataset gives us data for the Netherlands, per city and per province. The dataset gives average house prices of houses you can buy and the value of houses that people rent out. We used this dataset to find out what the changes in house prices were over the years.
 
-Data and zeefle:
-Data is a dataset from CBS that mentions the average income of groups with different hour contracts over the years 2019-2023 in the Netherlands. It also gives the total average of personal income which we used. We also have the dataset zeefle which is the same as dataset Data but it mentions the average income of Zeeland and Flevoland which we used for the temporal variation.
+Data2: Data2 (CBS, 2025b) is a dataset from CBS that mentions the average house prices of houses over the years 2019-2023. This dataset gives us data for the Netherlands, per city and per province. The dataset gives average house prices of houses you can buy and the value of houses that people rent out. We used this dataset to find out what the changes in house prices were over the years.
 
-provincie_2020:
-Dataset provincie_2020 is a dataset from the package cbsodataR that we used to make a map for the spatial variation. It provides the coordinates of every province.
+Data and zeefle: Data (CBS, 2025a) is a dataset from CBS that mentions the average income of groups with different hour contracts over the years 2019-2023 in the Netherlands. It also gives the total average of personal income which we used. We also have the dataset zeefle which is the same as dataset Data but it mentions the average income of Zeeland and Flevoland which we used for the temporal variation.
 
-df_2023 and df_2019:
-These datasets are from the same dataset from CBS and they give the same information. They provide us with data about the amount of businesses per province but one in the year 2023 and the other in 2019. We used this for our subgroup analysis.
+provincie_2020: Dataset provincie_2020 is a dataset from the package cbsodataR that we used to make a map for the spatial variation. It provides the coordinates of every province.
+
+df_2023 and df_2019: These two datasets (CBS, 2025c) are from the same dataset from CBS and they give the same information. They provide us with data about the amount of businesses per province but one in the year 2023 and the other in 2019. We used this for our subgroup analysis.
 
 ## 2.3 Describe the type of variables included
 
-The datasets makes use of multiple variables, including:
- WOZ Value in the Netherlands in each province from 2019 - 2023, Average income of working population in the Netherlands, Zeeland and Flevoland from 2019-2023 and Number of businesses per province in 2019 and 2023
+The datasets makes use of multiple variables, including: WOZ Value in the Netherlands in each province from 2019 - 2023, Average income of working population in the Netherlands, Zeeland and Flevoland from 2019-2023 and Number of businesses per province in 2019 and 2023
 
-These variables were all from the CBS and these are all administrative sources. 
+These variables were all from the CBS and these are all administrative sources.
 
 Think of things like:
 
 -   Do the variables contain health information or SES information?
 
 -   Have they been measured by interviewing individuals or is the data coming from administrative sources?
-
 
 # Part 3 - Quantifying
 
@@ -228,6 +218,7 @@ rownumber_zee
 new_row_fle <- data[11, ] / data[19,]  # Element-wise division of Flevoland's houseprices divided by the average income in Flevoland
 new_row_zee <- data[16, ] / data[20,]  # Element-wise division of Zeeland's houseprices divided by the average income in Zeeland
 ```
+
 Variable 2(dif): This variable is the house prices of 2023 divided by the house prices in 2019. This way we can see which city had the most increase during the years. We could find the city with the most increase and the city with the least amount of increase and find out if both cities increased more than the income. We can also use this in the subgroup analysis to find if an increase in businesses has a direct effect on the house prices.
 
 ```{r setup gen_var2, include = FALSE}
@@ -447,6 +438,16 @@ Here you provide a description of why the plot above is relevant to your specifi
 
 ## 4.1 Discuss your findings
 
+Our analysis confirms that from 2019 to 2023, housing prices in the Netherlands, measured through WOZ values, have increased at a much faster rate than personal incomes. This widening gap has made it increasingly difficult for average residents, especially first-time buyers, to purchase a home.
+
+The national house price to income ratio has risen steadily, reflecting a decline in overall affordability. Provinces like Flevoland showed the sharpest increases in WOZ values relative to income, while Zeeland followed a more moderate trend. Still, in both cases, income growth failed to keep up with rising housing prices.
+
+Our spatial analysis demonstrated that affordability issues are not limited to major cities. The problem is widespread and affects nearly all provinces, both urban and rural.
+
+We also examined the relationship between business growth and house price development. Although some provinces with strong economic growth saw larger increases in housing prices, the connection was not consistent. This suggests that other structural factors, such as limited housing supply and long permit procedures, play a more significant role.
+
+In conclusion, the data clearly shows a national housing affordability problem. Without targeted policy action, this trend will likely continue, putting further pressure on both the housing and rental markets.
+
 # Part 5 - Reproducibility
 
 ## 5.1 Github repository link
@@ -455,4 +456,14 @@ Provide the link to your PUBLIC repository here: <https://github.com/jasperdanie
 
 ## 5.2 Reference list
 
-Use APA referencing throughout your document.
+-   ABN AMRO. (2025, January 16). Woningtekort in 2025: hoe groot is het probleem?<https://www.abnamro.nl/nl/prive/hypotheken/wonen/woningtekort-in-2025.html>
+
+-   Langen M. (2025, January 16). Woningmarkt: Bouwen naar behoefte. ABN AMRO. <https://assets.abnamro.com/api/public/content/woningtekort-in-nederland.pdf>
+
+-   Mouissie, S., & Kraniotis, L. (2023, November 11). Schreeuwend tekort Aan Woningen en Hoge Huizenprijzen: Hoe is Het Zo Gekomen?. NOS.nl - Nieuws. <https://nos.nl/collectie/13960/artikel/2497415-schreeuwend-tekort-aan-woningen-en-hoge-huizenprijzen-hoe-is-het-zo-gekomen>
+
+-   Centraal Bureau voor de Statistiek (CBS). (2025a, February 26). Regionale inkomensverschillen; gestandaardiseerd besteedbaar inkomen. <https://opendata.cbs.nl/#/CBS/nl/dataset/85277NED/table?searchKeywords=gemiddeld%20inkomen>
+
+-   Centraal Bureau voor de Statistiek (2025b, June 19). (n.d.). Gemiddelde WOZ-waarde van woningen. <https://opendata.cbs.nl/statline/#/CBS/nl/dataset/85036NED/table>
+
+-   Centraal Bureau voor de Statistiek (CBS). (2025c, April 11.). Vestigingen van bedrijven. <https://opendata.cbs.nl/statline/#/CBS/nl/dataset/81578NED/table?fromstatweb>
