@@ -1,25 +1,3 @@
-buzyness <- read.csv('buzyness.csv')
-buzyness$Regio.s <- gsub('\\(PV\\)', '', buzyness$Regio.s)
-
-buzyness <- buzyness %>%
-  mutate(Regio.s = if_else(Regio.s == "Fryslân ", "Friesland ", Regio.s))
-
-buzyness <- buzyness %>%
-  rename(Bedrijfstak = "Bedrijfstakken.branches..SBI.2008.")
-buzyness <- buzyness %>%
-  rename('Nieuwe bedrijven' = 'Oprichtingen.van.vestigingen..aantal.')
-  
-buzyness <- filter(buzyness, Perioden == '2020', Bedrijfstak == 'A-U Alle economische activiteiten')
-buzyness <- buzyness[-c(1, 14),]
-buzyness$Regio.s <- gsub(' ', "", buzyness$Regio.s)
-
-data2 <- inner_join(buzyness, data2, by = 'Regio.s')
-
-unique(buzyness$Regio.s)
-
-unique(data2$Regio.s)
-
-
 # Load the CSV
 df_2023 <- read_csv2("bedrijvenNL2023.csv")
 df_2019 <- read_csv2("bedrijvenNL2019.csv")
@@ -70,15 +48,15 @@ bottom <- mean(busi[1:4])
 middle <- mean(busi[5:8])
 top <- mean(busi[9:12])
 
-bottom_woz <- mean(data2[1:4, 19])
-middle_woz <- mean(data2[5:8, 19])
-top_woz <- mean(data2[9:12, 19])
+bottom_woz <- mean(data2[1:4, 16])
+middle_woz <- mean(data2[5:8, 16])
+top_woz <- mean(data2[9:12, 16])
 
 # Create the clean dataframe from your dataset
 df <- data.frame(
   Province = data2[1:4, 3],
   Growth_Rate_New_Companies = data2[1:4, 8],
-  WOZ_change = data2[1:4, 19]
+  WOZ_change = data2[1:4, 16]
 )
 
 # Pivot to long format
@@ -97,7 +75,7 @@ ggplot(df_long, aes(x = Province, y = Value, fill = Type)) +
 df <- data.frame(
   Province = data2[5:8, 3],
   Growth_Rate_New_Companies = data2[5:8, 8],
-  WOZ_change = data2[5:8, 19]
+  WOZ_change = data2[5:8, 16]
 )
 
 # Pivot to long format
@@ -116,7 +94,7 @@ ggplot(df_long, aes(x = Province, y = Value, fill = Type)) +
 df <- data.frame(
   Province = data2[9:12, 3],
   Growth_Rate_New_Companies = data2[9:12, 8],
-  WOZ_change = data2[9:12, 19]
+  WOZ_change = data2[9:12, 16]
 )
 
 # Pivot to long format
