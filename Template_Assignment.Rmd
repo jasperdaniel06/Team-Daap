@@ -100,9 +100,19 @@ df_2023 and df_2019: These two datasets (CBS, 2025c) are from the same dataset f
 
 ## 2.3 Describe the type of variables included
 
-The datasets makes use of multiple variables, including: WOZ Value in the Netherlands in each province from 2019 - 2023, Average income of working population in the Netherlands, Zeeland and Flevoland from 2019-2023 and Number of businesses per province in 2019 and 2023
+The datasets makes use of multiple variables, including:
 
-These variables were all from the CBS and these are all administrative sources.
+-   WOZ Value in the Netherlands in each province from 2019 - 2023
+
+This data was gathered from CBS and is an administrative source about the house prices in the years 2019 to 2023.
+
+-   Average income of working population in the Netherlands, Zeeland and Flevoland from 2019-2023
+
+This data was gathered from CBS and is an administrative source about the average income in the Netherlands and the provinces in which we specifically picked out Zeeland and Flevoland.
+
+-   Number of businesses per province in 2019 and 2023
+
+This data was gathered from CBS and is an administrative source about the number of businesses per province in the years 2019 and 2023.
 
 Think of things like:
 
