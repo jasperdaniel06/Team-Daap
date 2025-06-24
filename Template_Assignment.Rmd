@@ -90,7 +90,7 @@ df_2019 <- read_csv2("bedrijvenNL2019.csv", show_col_types=FALSE)
 
 Data2: Data2 (CBS, 2025b) is a dataset from CBS that mentions the average house prices of houses over the years 2019-2023. This dataset gives us data for the Netherlands, per city and per province. The dataset gives average house prices of houses you can buy and the value of houses that people rent out. We used this dataset to find out what the changes in house prices were over the years.
 
-Data and zeefle: Data (CBS, 2025a) is a dataset from CBS that mentions the average income of groups with different hour contracts over the years 2019-2023 in the Netherlands. It also gives the total average of personal income which we used. We also have the dataset zeefle which is the same as dataset Data but it mentions the average income of Zeeland and Flevoland which we used for the temporal variation.
+Data and zeefle: Data (CBS, 2025a) is a dataset from CBS that mentions the average income of groups with different hour contracts over the years 2019-2023 in the Netherlands. It also gives the total average of personal income which we used. We also have the dataset zeefle (CBS, 2024) which is the same as dataset Data but it mentions the average income of Zeeland and Flevoland which we used for the temporal variation.
 
 provincie_2020: Dataset provincie_2020 is a dataset from the package cbsodataR that we used to make a map for the spatial variation. It provides the coordinates of every province.
 
@@ -660,7 +660,7 @@ Provide the link to your PUBLIC repository here: <https://github.com/jasperdanie
 
 ## 5.2 Reference list
 
--   ABN AMRO. (2025, January 16). Woningtekort in 2025: hoe groot is het probleem?<https://www.abnamro.nl/nl/prive/hypotheken/wonen/woningtekort-in-2025.html>
+-   ABN AMRO. (2025, January 16). Woningtekort in 2025: hoe groot is het probleem?. <https://www.abnamro.nl/nl/prive/hypotheken/wonen/woningtekort-in-2025.html>
 
 -   Langen M. (2025, January 16). Woningmarkt: Bouwen naar behoefte. ABN AMRO. <https://assets.abnamro.com/api/public/content/woningtekort-in-nederland.pdf>
 
@@ -668,6 +668,8 @@ Provide the link to your PUBLIC repository here: <https://github.com/jasperdanie
 
 -   Centraal Bureau voor de Statistiek (CBS). (2025a, February 26). Regionale inkomensverschillen; gestandaardiseerd besteedbaar inkomen. <https://opendata.cbs.nl/#/CBS/nl/dataset/85277NED/table?searchKeywords=gemiddeld%20inkomen>
 
--   Centraal Bureau voor de Statistiek (2025b, June 19). (n.d.). Gemiddelde WOZ-waarde van woningen. <https://opendata.cbs.nl/statline/#/CBS/nl/dataset/85036NED/table>
+-   Centraal Bureau voor de Statistiek (CBS). (2025b, June 19). Gemiddelde WOZ-waarde van woningen. <https://opendata.cbs.nl/statline/#/CBS/nl/dataset/85036NED/table>
 
--   Centraal Bureau voor de Statistiek (CBS). (2025c, April 11.). Vestigingen van bedrijven. <https://opendata.cbs.nl/statline/#/CBS/nl/dataset/81578NED/table?fromstatweb>
+-   Centraal Bureau voor de Statistiek (CBS). (2025c, April 11). Vestigingen van bedrijven. <https://opendata.cbs.nl/statline/#/CBS/nl/dataset/81578NED/table?fromstatweb>
+
+-   Centraal Bureau voor de Statistiek (CBS). (2024, 1 November). Inkomen van personen; persoonskenmerken, regio (indeling 2024). <https://opendata.cbs.nl/statline/#/CBS/nl/dataset/86005NED/table?dl=C2433>
