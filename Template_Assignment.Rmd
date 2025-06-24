@@ -662,7 +662,7 @@ Provide the link to your PUBLIC repository here: <https://github.com/jasperdanie
 
 -   ABN AMRO. (2025, January 16). Woningtekort in 2025: hoe groot is het probleem?. <https://www.abnamro.nl/nl/prive/hypotheken/wonen/woningtekort-in-2025.html>
 
--   Langen M. (2025, January 16). Woningmarkt: Bouwen naar behoefte. ABN AMRO. <https://assets.abnamro.com/api/public/content/woningtekort-in-nederland.pdf>
+-   Langen, M. (2025, January 16). Woningmarkt: Bouwen naar behoefte. ABN AMRO. <https://assets.abnamro.com/api/public/content/woningtekort-in-nederland.pdf>
 
 -   Mouissie, S., & Kraniotis, L. (2023, November 11). Schreeuwend tekort Aan Woningen en Hoge Huizenprijzen: Hoe is Het Zo Gekomen?. NOS.nl - Nieuws. <https://nos.nl/collectie/13960/artikel/2497415-schreeuwend-tekort-aan-woningen-en-hoge-huizenprijzen-hoe-is-het-zo-gekomen>
 
