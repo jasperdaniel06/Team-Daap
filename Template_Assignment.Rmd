@@ -77,8 +77,6 @@ This issue must be taken seriously because it affects both individuals and socie
 
 ## 2.1 Load in the data
 
-Preferably from a URL, but if not, make sure to download the data and store it in a shared location that you can load the data in from. Do not store the data in a folder you include in the Github repository!
-
 ```{r loading_data}
 data2 <- read.csv("wozdata.csv")
 data <- read.csv("inkdata.csv")
@@ -113,12 +111,6 @@ This data was gathered from CBS and is an administrative source about the averag
 -   Number of businesses per province in 2019 and 2023
 
 This data was gathered from CBS and is an administrative source about the number of businesses per province in the years 2019 and 2023.
-
-Think of things like:
-
--   Do the variables contain health information or SES information?
-
--   Have they been measured by interviewing individuals or is the data coming from administrative sources?
 
 # Part 3 - Quantifying
 
@@ -351,8 +343,6 @@ ggplot(data2) +
   theme_minimal() +
   labs(title = "Map of House prices per region", fill = "House prices in 2023\nx1000 in euros")
 ```
-
-Please use a separate 'R block' of code for each type of cleaning. So, e.g. one for missing values, a new one for removing unnecessary variables etc.
 
 ## 3.2 Generate necessary variables
 
@@ -623,8 +613,6 @@ ggplot(data, aes(x = Group, y = Value, fill = Category)) +
 For this subgroup analysis we wanted to see if an increase in new companies had a direct impact on WOZ value. We analysed this by grouping the 12 provinces into 3 groups based on the growth of new companies. Highest 4 having the highest growth and lowest 4 having the least growth in new companies. Each group we took the average growth of new companies and the average change in WOZ value. Based on the bar plot we could conclude that growth of new companies and change in WOZ value have a positive correlation, but we could not conclude that the growth of new companies has a direct impact on the WOZ value. This is because of a limitation that the growth of new companies and the WOZ value is almost the same in the three groups.
 
 ## 3.6 Event analysis
-
-Analyze the relationship between two variables.
 
 ```{r include=FALSE}
 source("Gioravalav.R", echo = TRUE)
