@@ -125,6 +125,7 @@ Think of things like:
 ## 3.1 Data cleaning
 
 If we wanted to keep certain rows in a dataset and delete everything else then we used this code:
+
 ```{r include=FALSE}
 data2 <- read.csv("wozdata.csv")
 
@@ -134,7 +135,9 @@ colnames(data2) <- data2[3, ] # turns the column names in the years
 ```{r data_cleaning}
 data2 <- data2[-c(1:5, 19:379), -c(1, 2, 5:7, 9:11, 13:15, 17:19, 21:23)] #verwijdert onnodige columns en rows
 ```
+
 If we wanted to make a certain column in the dataset the name of the rows we used this code:
+
 ```{r include=FALSE}
 data2 <- na.omit(data2)  # Removes all rows that contain NA values
 ```
@@ -142,7 +145,9 @@ data2 <- na.omit(data2)  # Removes all rows that contain NA values
 ```{r data_cleaning_2}
 rownames(data2) <- data2[, 1]  # Set row names using the first column
 ```
+
 Because it is a Dutch dataset the decimals are commas, so to make the commas into decimal points we used this code:
+
 ```{r include=FALSE}
 data2 <- data2[, -1]  # Remove the first column if it's no longer needed
 
@@ -165,6 +170,7 @@ data <- apply(data, 2, function(x) gsub(",", ".", x)) # replaces every comma int
 ```
 
 Because we wanted to put two datasets under each other we used this code:
+
 ```{r data_cleaning_4}
 data <- rbind(data, data2) # merges the two data sets
 ```
@@ -319,7 +325,9 @@ str(provincie_2020) # sf object
 data2$Regio.s <- row.names(data2)
 colnames(provincie_2020)[2] <- "Regio.s"
 ```
+
 If we wanted to make two data sets join we needed to change names so it could join and the codes we used looked like this:
+
 ```{r data_cleaning_5}
 data2$Regio.s <- gsub(" \\(PV\\)", "", data2$Regio.s)
 data2$Regio.s <- gsub("Fryslân", "Friesland", data2$Regio.s)
@@ -343,6 +351,7 @@ ggplot(data2) +
   theme_minimal() +
   labs(title = "Map of House prices per region", fill = "House prices in 2023\nx1000 in euros")
 ```
+
 Please use a separate 'R block' of code for each type of cleaning. So, e.g. one for missing values, a new one for removing unnecessary variables etc.
 
 ## 3.2 Generate necessary variables
@@ -569,6 +578,8 @@ ggplot(graph_data_long, aes(x = Year, y = Value, color = Region, group = Region)
   theme_bw()
 ```
 
+With this temporal variation we wanted to see if over the years the WOZ value relative to the average income actually increased, with which we can conclude if the increase in house prices actually had an impact on the affordability of houses. For this we decided to measure this in the Netherlands, Flevoland, who has the highest change in WOZ value of the provinces, and Zeeland, who has the lowest change in WOZ value of the provinces. For each of these places we divided the house prices with the average income in that area. When we looked at the graph we were able to confirm that the house prices relatively increased compared to the average income and in particular did Flevoland have the highest relative increase. However there was a limitation in our findings: that this graph did not take into account that there are other expenses that have changed over time. So we cannot decide based solely on this graph how big of an impact the increase in house prices has on the percentage of income that people spend on their houses.
+
 ## 3.4 Visualize spatial variation
 
 ```{r visualise_map, include=FALSE}
@@ -591,7 +602,7 @@ ggplot(data2) +
   labs(title = "Map of House prices per region", fill = "House prices in 2023\nx1000 in euros")
 ```
 
-Here you provide a description of why the plot above is relevant to your specific social problem.
+For this spatial variation we mapped the house prices in 2020 and 2023 in order to see if there was a province that exceptionally grew compared to the other provinces. When you look at the two maps you can clearly see that every province had an increase in house prices and you can also see that the provinces all had relatively the same growth. While creating the spatial variation, we encountered a limitation. We could not find any data on the average m2 of houses per province so that we could make this map based on the average house prices per m2 in each province. So this map isn't as accurate as it could have been if we found that data.
 
 ## 3.5 Visualize sub-population variation
 
@@ -609,7 +620,7 @@ ggplot(data, aes(x = Group, y = Value, fill = Category)) +
        x = "Group", y = "Average Value", fill = "Category")
 ```
 
-Here you provide a description of why the plot above is relevant to your specific social problem.
+For this subgroup analysis we wanted to see if an increase in new companies had a direct impact on WOZ value. We analysed this by grouping the 12 provinces into 3 groups based on the growth of new companies. Highest 4 having the highest growth and lowest 4 having the least growth in new companies. Each group we took the average growth of new companies and the average change in WOZ value. Based on the bar plot we could conclude that growth of new companies and change in WOZ value have a positive correlation, but we could not conclude that the growth of new companies has a direct impact on the WOZ value. This is because of a limitation that the growth of new companies and the WOZ value is almost the same in the three groups.
 
 ## 3.6 Event analysis
 
